@@ -12,8 +12,8 @@ using Xunarmand.Persistence.DataContext;
 namespace Xunarmand.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240415072831_Initial")]
-    partial class Initial
+    [Migration("20240415100840_User")]
+    partial class User
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace Xunarmand.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Brithday")
+                    b.Property<string>("Birthday")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedTime")

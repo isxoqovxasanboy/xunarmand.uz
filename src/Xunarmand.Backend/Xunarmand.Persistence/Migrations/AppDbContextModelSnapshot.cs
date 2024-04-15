@@ -28,7 +28,7 @@ namespace Xunarmand.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Brithday")
+                    b.Property<string>("Birthday")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedTime")

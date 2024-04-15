@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Xunarmand.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class User : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,7 @@ namespace Xunarmand.Persistence.Migrations
                     Email = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     Password = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    Brithday = table.Column<string>(type: "text", nullable: true),
+                    Birthday = table.Column<string>(type: "text", nullable: true),
                     CreatedTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     ModifiedTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
