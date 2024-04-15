@@ -5,18 +5,23 @@ public static partial class  HostConfigurations
     public static  ValueTask<WebApplicationBuilder> ConfigureAsnyc(this WebApplicationBuilder builder)
     {
         builder
+            .AddMappers()
+            .AddValidators()   
             .AddPersistence()
+            .AddIdentityInfrastructure()
+            .AddMediator()
             .AddDevTools()
             .AddExposers();
         return new ValueTask<WebApplicationBuilder>(builder);
     }
     
-    public static ValueTask<WebApplication> ConfigureAsnyc(this WebApplication  app)
+    public static async ValueTask<WebApplication> ConfigureAsnyc(this WebApplication  app)
     {
+        await app.SeedDataAsync();
         app
             .UseDevtools()
             .UseExposers();
-        return new ValueTask<WebApplication>(app);
+        return app; 
     }
     
 } 
