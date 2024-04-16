@@ -5,54 +5,56 @@ using Xunarmand.Domain.Entities;
 
 namespace Xunarmand.Persistence.Repositories.Interface;
 
- public interface IProductRepository
+/// <summary>
+/// Interface representing a repository for managing products.
+/// </summary>
+public interface IProductRepository
 {
     /// <summary>
-    /// Retrieves a queryable collection of client entities based on the specified predicate.
+    /// Retrieves products based on the specified predicate and query options.
     /// </summary>
-    /// <param name="predicate">A predicate to filter the clients (optional).</param>
-    /// <param name="queryOptions">Indicates whether the entities should be queried without tracking changes (default is false).</param>
-    /// <returns>A queryable collection of client entities.</returns>
+    /// <param name="predicate">The predicate to filter products.</param>
+    /// <param name="queryOptions">Options for querying products.</param>
+    /// <returns>An IQueryable collection of products.</returns>
     IQueryable<Product> Get(Expression<Func<Product, bool>>? predicate = default, QueryOptions queryOptions = default);
 
     /// <summary>
-    /// Asynchronously retrieves a client entity by its unique identifier.
+    /// Retrieves a product by its unique identifier asynchronously.
     /// </summary>
-    /// <param name="clientId">The unique identifier of the client.</param>
-    /// <param name="queryOptions">Indicates whether the entity should be queried without tracking changes (default is false).</param>
-    /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
-    /// <returns>A task representing the asynchronous operation, containing the client entity, or null if not found.</returns>
+    /// <param name="clientId">The unique identifier of the product.</param>
+    /// <param name="queryOptions">Options for querying products.</param>
+    /// <param name="cancellationToken">Cancellation token for asynchronous operation.</param>
+    /// <returns>A ValueTask representing the asynchronous operation with the retrieved product.</returns>
     ValueTask<Product?> GetByIdAsync(Guid clientId, QueryOptions queryOptions = default,
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Asynchronously creates a new client entity with the specified options.
+    /// Creates a new product asynchronously.
     /// </summary>
-    /// <param name="user">The client entity to create.</param>
-    /// <param name="commandOptions">Options for customizing the command (optional).</param>
-    /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
-    /// <returns>A task representing the asynchronous operation, containing the created client entity.</returns>
+    /// <param name="product">The product to create.</param>
+    /// <param name="commandOptions">Options for creating the product.</param>
+    /// <param name="cancellationToken">Cancellation token for asynchronous operation.</param>
+    /// <returns>A ValueTask representing the asynchronous operation with the created product.</returns>
     ValueTask<Product> CreateAsync(Product product, CommandOptions commandOptions = default,
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Asynchronously updates an existing client entity.
+    /// Updates an existing product asynchronously.
     /// </summary>
-    /// <param name="user">The client entity to update.</param>
-    /// <param name="commandOptions">Indicates whether changes should be saved to the underlying data store (default is true).</param>
-    /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
-    /// <returns>A task representing the asynchronous operation, containing the updated client entity.</returns>
+    /// <param name="product">The product to update.</param>
+    /// <param name="commandOptions">Options for updating the product.</param>
+    /// <param name="cancellationToken">Cancellation token for asynchronous operation.</param>
+    /// <returns>A ValueTask representing the asynchronous operation with the updated product.</returns>
     ValueTask<Product> UpdateAsync(Product product, CommandOptions commandOptions = default,
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Asynchronously deletes a client entity by its unique identifier.
+    /// Deletes a product by its unique identifier asynchronously.
     /// </summary>
-    /// <param name="clientId">The unique identifier of the client to delete.</param>
-    /// <param name="commandOptions">Indicates whether changes should be saved to the underlying data store (default is true).</param>
-    /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
-    /// <returns>A task representing the asynchronous operation, containing the deleted client entity, or null if not found.</returns>
+    /// <param name="clientId">The unique identifier of the product.</param>
+    /// <param name="commandOptions">Options for deleting the product.</param>
+    /// <param name="cancellationToken">Cancellation token for asynchronous operation.</param>
+    /// <returns>A ValueTask representing the asynchronous operation.</returns>
     ValueTask<Product?> DeleteByIdAsync(Guid clientId, CommandOptions commandOptions,
         CancellationToken cancellationToken = default);
-   
 }

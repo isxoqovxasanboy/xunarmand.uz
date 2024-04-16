@@ -32,8 +32,3 @@ public class Product : AuditableEntity
     /// </summary>
     public string? ImageUrl { get; set; }
 }
-
-/// <summary>
-/// Initializes a new instance of the <see cref="Product"/> class with the specified parameters.
-/// </summary>
-/// <

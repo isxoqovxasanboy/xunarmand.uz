@@ -4,7 +4,7 @@ using Xunarmand.Domain.Entities;
 
 namespace Xunarmand.Persistence.EntityConfigurations;
 
-public class ProductConfiguration:IEntityTypeConfiguration<Product>
+public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {

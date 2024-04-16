@@ -4,7 +4,7 @@ using Xunarmand.Domain.Entities;
 
 namespace Xunarmand.Persistence.EntityConfigurations;
 
-public class UserConfiguration:IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
