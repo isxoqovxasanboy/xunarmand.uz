@@ -11,8 +11,6 @@ namespace Xunarmand.Persistence.Repositories;
 /// Represents a base repository for entities with common CRUD operations.
 /// </summary>
 /// <param name="dbContext"></param>
-/// <param name="cacheBroker"></param>
-/// <param name="cacheEntryOptions"></param>
 /// <typeparam name="TEntity"></typeparam>
 /// <typeparam name="TContext"></typeparam>
 public abstract class EntityRepositoryBase<TEntity, TContext>(

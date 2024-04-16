@@ -1,20 +1,20 @@
 ﻿using System.Linq.Expressions;
-using Xunarmand.Application.User.Models;
+using Xunarmand.Application.Users.Models;
 using Xunarmand.Domain.Common.Commands;
 using Xunarmand.Domain.Common.Queries;
+using Xunarmand.Domain.Entities;
 
-namespace Xunarmand.Application.User.Queries;
+namespace Xunarmand.Application.Users.Services;
 
 public interface IUserService
 {
-    
     /// <summary>
     /// Retrieves a queryable collection of client entities based on the specified predicate and query options.
     /// </summary>
     /// <param name="predicate">A predicate to filter the clients (optional).</param>
     /// <param name="queryOptions">Options for customizing the query (optional).</param>
     /// <returns>A queryable collection of client entities.</returns>
-    IQueryable<Domain.Entities.User> Get(Expression<Func<Domain.Entities.User, bool>>? predicate = default, QueryOptions queryOptions = default);
+    IQueryable<User> Get(Expression<Func<User, bool>>? predicate = default, QueryOptions queryOptions = default);
 
     /// <summary>
     /// Retrieves a queryable collection of client entities based on the specified client filter and query options.
@@ -23,7 +23,7 @@ public interface IUserService
     /// <param name="queryOptions">Options for customizing the query (optional).</param>
     /// <returns>A queryable collection of client entities.</returns>
     IQueryable<Domain.Entities.User> Get(UserFilter clientFilter, QueryOptions queryOptions = default);
-    
+
     /// <summary>
     /// Asynchronously retrieves a client entity by its unique identifier and query options.
     /// </summary>
@@ -31,17 +31,19 @@ public interface IUserService
     /// <param name="queryOptions">Options for customizing the query (optional).</param>
     /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
     /// <returns>A task representing the asynchronous operation, containing the client entity, or null if not found.</returns>
-    ValueTask<Domain.Entities.User?> GetByIdAsync(Guid clientId, QueryOptions queryOptions = default, CancellationToken cancellationToken = default);
+    ValueTask<User?> GetByIdAsync(Guid userId, QueryOptions queryOptions = default,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously creates a new client entity with the specified options.
     /// </summary>
-    /// <param name="client">The user entity to create.</param>
+    /// <param name="user">The user entity to create.</param>
     /// <param name="commandOptions">Options for customizing the command (optional).</param>
     /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
     /// <returns>A task representing the asynchronous operation, containing the created client entity.</returns>
-    ValueTask<Domain.Entities.User> CreateAsync(Domain.Entities.User client,  CommandOptions commandOptions = default, CancellationToken cancellationToken = default);
-    
+    ValueTask<User> CreateAsync(User user, CommandOptions commandOptions = default,
+        CancellationToken cancellationToken = default);
+
     /// <summary>
     /// Asynchronously updates an existing client entity with the specified options.
     /// </summary>
@@ -49,8 +51,9 @@ public interface IUserService
     /// <param name="commandOptions">Options for customizing the command (optional).</param>
     /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
     /// <returns>A task representing the asynchronous operation, containing the updated user entity.</returns>
-    ValueTask<Domain.Entities.User?> UpdateAsync(Domain.Entities.User client,  CommandOptions commandOptions = default, CancellationToken cancellationToken = default);
-    
+    ValueTask<User> UpdateAsync(User user, CommandOptions commandOptions = default,
+        CancellationToken cancellationToken = default);
+
     /// <summary>
     /// Asynchronously deletes a client entity by its unique identifier with the specified options.
     /// </summary>
@@ -58,5 +61,6 @@ public interface IUserService
     /// <param name="commandOptions">Options for customizing the command (optional).</param>
     /// <param name="cancellationToken">A cancellation token to cancel the asynchronous operation (optional).</param>
     /// <returns>A task representing the asynchronous operation, containing the deleted client entity, or null if not found.</returns>
-    ValueTask<Domain.Entities.User?> DeleteByIdAsync(Guid clientId, CommandOptions commandOptions = default, CancellationToken cancellationToken = default);
+    ValueTask<User?> DeleteByIdAsync(Guid userId, CommandOptions commandOptions = default,
+        CancellationToken cancellationToken = default);
 }

@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Options;
 using Xunarmand.Application.Common.Settings;
+using Xunarmand.Domain.Entities;
 using Xunarmand.Domain.Enums;
 
-namespace Xunarmand.Infrastructure.User.Validators;
+namespace Xunarmand.Infrastructure.Users.Validators;
 
-public class UserValidation:AbstractValidator<Domain.Entities.User>
+public class UserValidation:AbstractValidator<User>
 {
     public UserValidation(IOptions<ValidationSettings> validationSettings)
     {
@@ -28,13 +29,13 @@ public class UserValidation:AbstractValidator<Domain.Entities.User>
                     .Matches(validationSettingsValue.NameRegexPattern);
                     
 
-                RuleFor(client => client.Email)
+                RuleFor(client => client.EmailAddress)
                     .NotEmpty()
                     .MinimumLength(3)
                     .MaximumLength(128)
                     .Matches(validationSettingsValue.EmailRegexPattern);
 
-                RuleFor(client => client.Password).NotEmpty();
+                RuleFor(client => client.PasswordHash).NotEmpty();
             }
         );
         
@@ -55,13 +56,13 @@ public class UserValidation:AbstractValidator<Domain.Entities.User>
                     .Matches(validationSettingsValue.NameRegexPattern);
                     
 
-                RuleFor(client => client.Email)
+                RuleFor(client => client.EmailAddress)
                     .NotEmpty()
                     .MinimumLength(3)
                     .MaximumLength(128)
                     .Matches(validationSettingsValue.EmailRegexPattern);
 
-                RuleFor(client => client.Password).NotEmpty();
+                RuleFor(client => client.PasswordHash).NotEmpty();
             }
         );
         

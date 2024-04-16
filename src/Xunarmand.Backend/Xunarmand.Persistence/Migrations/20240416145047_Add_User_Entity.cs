@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Xunarmand.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class User : Migration
+    public partial class Add_User_Entity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,12 @@ namespace Xunarmand.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FirstName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    Email = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Password = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    Birthday = table.Column<string>(type: "text", nullable: true),
+                    FirstName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    LastName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    EmailAddress = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    PasswordHash = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
                     CreatedTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     ModifiedTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },

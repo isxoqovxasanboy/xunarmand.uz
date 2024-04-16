@@ -4,7 +4,7 @@ using Xunarmand.Persistence.DataContext;
 
 namespace Xunarmand.Api.Data;
 
-public static class SeedDataExtensions
+public static class  SeedDataExtensions
 {
     /// <summary>
     /// Initializes the seed data asynchronously.
@@ -26,30 +26,30 @@ public static class SeedDataExtensions
                     Id = Guid.Parse("54e16318-d140-4453-80c9-1a117dbe75fd"),
                     FirstName = "John",
                     LastName = "Doe",
-                    Birthday = "10.20.2002",
+                    Birthday = DateOnly.Parse("10/20/2002"),
                     PhoneNumber = "123456789012",
-                    Email = "example@gmail.com",
-                    Password = "$2a$12$pHdneNbJGp4SnN1ovHrNqevf6I.k3Gy.7OMJoWWB0RByv0foi4fgy", // qwerty123
+                    EmailAddress = "example@gmail.com",
+                    PasswordHash = "$2a$12$pHdneNbJGp4SnN1ovHrNqevf6I.k3Gy.7OMJoWWB0RByv0foi4fgy", // qwerty123
                 },
                 new()
                 {
                     Id = Guid.Parse("5edbb0fe-7263-4f75-bad8-c9f3d422dd1d"),
                     FirstName = "Bob",
                     LastName = "Richard",
-                    Birthday = "10.20.2002",
+                    Birthday = DateOnly.Parse("10.20.2000"),
                     PhoneNumber = "123456789012",
-                    Email = "tastBobRichard@gmail.com",
-                    Password = "$2a$12$LxSqe5AE7AtglesHHK5NROFdJQdA1r1XKqhzg4q/tMTZjVEH0PNSK", //asdf1234
+                    EmailAddress = "tastBobRichard@gmail.com",
+                    PasswordHash = "$2a$12$LxSqe5AE7AtglesHHK5NROFdJQdA1r1XKqhzg4q/tMTZjVEH0PNSK", //asdf1234
                 },
                 new()
                 {
                     Id = Guid.Parse("6357D344-CB69-4FAA-81C5-AC0FC59AE0F9"),
                     FirstName = "Sarah",
                     LastName = "Funk",
-                    Birthday = "10.20.2002",
+                    Birthday = DateOnly.Parse("10.10.2002"),
                     PhoneNumber = "123456789012",
-                    Email = "sarah.funk@gmail.com",
-                    Password = "$2a$12$LxSqe5AE7AtglesHHK5NROFdJQdA1r1XKqhzg4q/tMTZjVEH0PNSK", //asdf1234
+                    EmailAddress = "sarah.funk@gmail.com",
+                    PasswordHash = "$2a$12$LxSqe5AE7AtglesHHK5NROFdJQdA1r1XKqhzg4q/tMTZjVEH0PNSK", //asdf1234
                 }
             };
 

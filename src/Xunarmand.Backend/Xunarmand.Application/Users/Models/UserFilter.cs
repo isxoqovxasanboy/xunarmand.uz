@@ -1,6 +1,6 @@
 ﻿using Xunarmand.Domain.Common.Queries;
 
-namespace Xunarmand.Application.User.Models;
+namespace Xunarmand.Application.Users.Models;
 
 public class UserFilter:FilterPagination
 {

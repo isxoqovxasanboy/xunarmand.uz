@@ -1,10 +1,10 @@
-﻿using Xunarmand.Application.User.Command;
-using Xunarmand.Application.User.Queries;
+﻿using Xunarmand.Application.Users.Commands;
+using Xunarmand.Application.Users.Services;
 using Xunarmand.Domain.Common.Commands;
 
-namespace Xunarmand.Infrastructure.User.CommandHandlers;
+namespace Xunarmand.Infrastructure.Users.CommandHandlers;
 
-public class UserDaleteByIdCommandHandler(IUserService service):ICommandHandler<UserDeleteByIdCommand, bool>
+public class UserDeleteByIdCommandHandler(IUserService service):ICommandHandler<UserDeleteByIdCommand, bool>
 {
     public async Task<bool> Handle(UserDeleteByIdCommand request, CancellationToken cancellationToken)
     {

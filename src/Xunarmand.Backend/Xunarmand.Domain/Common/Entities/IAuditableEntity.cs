@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an interface for auditable entities, defining properties related to creation and modification timestamps.
 /// </summary>
-public interface IAuditableEntity
+public interface IAuditableEntity : IEntity
 {
     /// <summary>
     /// Gets or sets the date and time when the entity was created.

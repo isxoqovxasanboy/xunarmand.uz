@@ -9,4 +9,6 @@ public struct CommandOptions()
     /// Gets or sets a value indicating whether changes made by the command should be automatically saved to the underlying data store.
     /// </summary>
     public bool SkipSaveChanges { get; set; } = false;
+
+    public CommandOptions(bool skipSaveChanges) : this() => SkipSaveChanges = skipSaveChanges;
 }

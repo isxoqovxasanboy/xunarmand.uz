@@ -8,10 +8,10 @@ public class UserConfiguration:IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Property(client => client.FirstName).HasMaxLength(64).IsRequired();
-        builder.Property(client => client.LastName).HasMaxLength(64).IsRequired();
-        builder.Property(client => client.Email).HasMaxLength(128).IsRequired();
-        builder.Property(client => client.Password).HasMaxLength(128).IsRequired();
-        
+        builder.Property(user => user.FirstName).HasMaxLength(64);
+        builder.Property(user => user.LastName).HasMaxLength(64);
+        builder.Property(user => user.EmailAddress).HasMaxLength(128).IsRequired();
+        builder.Property(user => user.PasswordHash).HasMaxLength(128).IsRequired();
+        builder.Property(user => user.PhoneNumber).HasMaxLength(15);
     }
 }

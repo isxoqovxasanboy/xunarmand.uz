@@ -1,6 +1,6 @@
 ﻿using Xunarmand.Domain.Common.Commands;
 
-namespace Xunarmand.Application.User.Command;
+namespace Xunarmand.Application.Users.Commands;
 
 public record UserDeleteByIdCommand:ICommand<bool>
 {

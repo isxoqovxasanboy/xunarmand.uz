@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Xunarmand.Application.User.Command;
-using Xunarmand.Application.User.Queries;
+using Xunarmand.Application.Users.Commands;
+using Xunarmand.Application.Users.Queries;
 
 namespace Xunarmand.Api.Controller;
 [ApiController]
@@ -17,14 +17,14 @@ public class UserController(IMediator mediator): ControllerBase
     [HttpGet("{clientId:guid}")]
     public async ValueTask<IActionResult> GetById([FromRoute] Guid clientId, CancellationToken cancellationToken)
     {
-        var result = await mediator.Send(new UserGetByIDQuery(){Id = clientId}, cancellationToken);
+        var result = await mediator.Send(new UserGetByIdQuery(){Id = clientId}, cancellationToken);
         return result is not null ? Ok(result) : NoContent();
     }
 
     [HttpGet("by-email/{emailAddress}")]
     public async ValueTask<IActionResult> CheckClientByEmail([FromRoute] string emailAddress, CancellationToken cancellationToken)
     {
-        var result = await mediator.Send(new CheckUserByEmailQuery() { EmailAddress = emailAddress }, cancellationToken);
+        var result = await mediator.Send(new CheckUserByEmailAddressQuery() { EmailAddress = emailAddress }, cancellationToken);
 
         return result is not null ? Ok(result) : NotFound();
     }
