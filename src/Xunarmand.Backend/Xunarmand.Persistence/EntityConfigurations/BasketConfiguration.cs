@@ -9,5 +9,10 @@ public class BasketConfiguration:IEntityTypeConfiguration<Basket>
     public void Configure(EntityTypeBuilder<Basket> builder)
     {
         builder.Property(basket => basket.OperationTime).IsRequired();
+
+        builder
+            .HasOne(basket => basket.User)
+            .WithMany(user => user.Baskets)
+            .HasForeignKey(basket => basket.UserId);
     }
 }

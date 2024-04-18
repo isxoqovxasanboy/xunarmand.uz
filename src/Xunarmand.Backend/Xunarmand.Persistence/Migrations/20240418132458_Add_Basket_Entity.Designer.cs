@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Xunarmand.Persistence.DataContext;
@@ -11,9 +12,11 @@ using Xunarmand.Persistence.DataContext;
 namespace Xunarmand.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240418132458_Add_Basket_Entity")]
+    partial class Add_Basket_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,12 +43,7 @@ namespace Xunarmand.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Baskets");
                 });
@@ -54,9 +52,6 @@ namespace Xunarmand.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("BasketId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedTime")
@@ -75,8 +70,6 @@ namespace Xunarmand.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.HasIndex("ProductId");
 
@@ -163,47 +156,20 @@ namespace Xunarmand.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
-                {
-                    b.HasOne("Xunarmand.Domain.Entities.User", "User")
-                        .WithMany("Baskets")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("Xunarmand.Domain.Entities.Basket", "Basket")
-                        .WithMany("Orders")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Xunarmand.Domain.Entities.Product", "Product")
                         .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Basket");
-
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Xunarmand.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Baskets");
                 });
 #pragma warning restore 612, 618
         }

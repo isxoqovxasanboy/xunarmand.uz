@@ -15,5 +15,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasOne(order => order.Product)
             .WithMany(product => product.Orders)
             .HasForeignKey(order => order.ProductId);
+        
+        builder
+            .HasOne(order => order.Basket)
+            .WithMany(product => product.Orders)
+            .HasForeignKey(order => order.BasketId);
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Xunarmand.Persistence.DataContext;
@@ -11,9 +12,11 @@ using Xunarmand.Persistence.DataContext;
 namespace Xunarmand.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240418132935_Add_Basket_And_User_Relations")]
+    partial class Add_Basket_And_User_Relations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +59,6 @@ namespace Xunarmand.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BasketId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -75,8 +75,6 @@ namespace Xunarmand.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.HasIndex("ProductId");
 
@@ -174,26 +172,13 @@ namespace Xunarmand.Persistence.Migrations
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("Xunarmand.Domain.Entities.Basket", "Basket")
-                        .WithMany("Orders")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Xunarmand.Domain.Entities.Product", "Product")
                         .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Basket");
-
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
