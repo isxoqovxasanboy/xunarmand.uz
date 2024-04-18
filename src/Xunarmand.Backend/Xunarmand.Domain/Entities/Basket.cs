@@ -1,4 +1,5 @@
-﻿using Xunarmand.Domain.Common.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Xunarmand.Domain.Common.Entities;
 using Xunarmand.Domain.Enums;
 
 namespace Xunarmand.Domain.Entities;
@@ -12,7 +13,7 @@ public class Basket : AuditableEntity
     /// <summary>
     /// Gets or sets the ID of the user associated with this basket.
     /// </summary>
-    public Guid UserId { get; set; }
+    public Guid? UserId { get; set; }
 
     /// <summary>
     /// Gets or sets the timestamp of the basket operation.
@@ -28,4 +29,9 @@ public class Basket : AuditableEntity
     /// Gets or sets the user object associated with this basket.
     /// </summary>
     public User? User { get; set; }
+
+    /// <summary>
+    /// Navigation property to access the orders associated with this basket.
+    /// </summary>
+    public ICollection<Order> Orders { get; set; }
 }

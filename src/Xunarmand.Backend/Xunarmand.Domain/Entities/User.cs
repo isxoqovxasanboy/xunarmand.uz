@@ -37,4 +37,9 @@ public class User : AuditableEntity
     /// Gets or sets the birthday of the user.
     /// </summary>
     public DateOnly Birthday { get; set; }
+
+    /// <summary>
+    /// Navigation property to access the baskets associated with this basket.
+    /// </summary>
+    public ICollection<Basket> Baskets { get; set; }
 }
