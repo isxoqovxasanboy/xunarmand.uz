@@ -9,7 +9,7 @@ using Xunarmand.Persistence.Repositories.Interface;
 
 namespace Xunarmand.Persistence.Repositories;
 
-public class ProdcutRepository(AppDbContext appDbContext):EntityRepositoryBase<Product,AppDbContext>(appDbContext),IProductRepository
+public class ProductRepository(AppDbContext appDbContext):EntityRepositoryBase<Product,AppDbContext>(appDbContext),IProductRepository
 {
     public IQueryable<Product> Get(Expression<Func<Product, bool>>? predicate = default,
                                    QueryOptions queryOptions = default)
