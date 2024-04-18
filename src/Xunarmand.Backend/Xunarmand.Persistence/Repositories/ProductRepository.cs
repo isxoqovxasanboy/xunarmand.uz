@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Xunarmand.Domain.Common.Commands;
 using Xunarmand.Domain.Common.Queries;
 using Xunarmand.Domain.Entities;
@@ -13,8 +13,7 @@ public class ProductRepository(AppDbContext appDbContext)
     public IQueryable<Product> Get(Expression<Func<Product, bool>>? predicate = default,
         QueryOptions queryOptions = default) 
         => base.Get(predicate, queryOptions);
-
-
+    
     public ValueTask<Product?> GetByIdAsync(Guid clientId, QueryOptions queryOptions = default,
         CancellationToken cancellationToken = default)
         => base.GetByIdAsync(clientId, queryOptions, cancellationToken);
@@ -33,6 +32,6 @@ public class ProductRepository(AppDbContext appDbContext)
     }
 
     public ValueTask<Product?> DeleteByIdAsync(Guid clientId, CommandOptions commandOptions,
-        CancellationToken cancellationToken = default)
+                                               CancellationToken cancellationToken = default)
         => base.DeleteByIdAsync(clientId, commandOptions, cancellationToken);
 }

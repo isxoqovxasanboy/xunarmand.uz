@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using Xunarmand.Domain.Common.Entities;
 
 namespace Xunarmand.Domain.Entities;
