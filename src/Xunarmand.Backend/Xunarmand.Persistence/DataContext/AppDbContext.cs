@@ -10,6 +10,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Product> Products => Set<Product>();
 
     public DbSet<Order> Orders => Set<Order>();
+    
+    public DbSet<Basket> Baskets => Set<Basket>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
