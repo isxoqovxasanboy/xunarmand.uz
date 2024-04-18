@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunarmand.Api.Data;
 using Xunarmand.Application.Common.Settings;
 using Xunarmand.Application.Users.Services;
+using Xunarmand.Infrastructure.Products.Services;
 using Xunarmand.Infrastructure.Users.Services;
 using Xunarmand.Persistence.DataContext;
 using Xunarmand.Persistence.Repositories;
@@ -44,6 +45,13 @@ public static partial class  HostConfigurations
 
     private static WebApplicationBuilder AddIdentityInfrastructure(this WebApplicationBuilder builder)
     {
+        // product
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        builder.Services.AddScoped<IProductService, ProductService>();
+        
+        
+        
+        // user
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserService, UserService>();
 
