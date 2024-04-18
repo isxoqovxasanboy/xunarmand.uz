@@ -4,7 +4,7 @@ using Xunarmand.Domain.Entities;
 
 namespace Xunarmand.Persistence.EntityConfigurations;
 
-public class OrderConfiguration: IEntityTypeConfiguration<Order> 
+public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {

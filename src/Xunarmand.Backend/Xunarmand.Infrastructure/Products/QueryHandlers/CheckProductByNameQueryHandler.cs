@@ -13,8 +13,8 @@ public class CheckProductByNameQueryHandler(IProductService service, IMapper map
     public async Task<string> Handle(CheckProductByNameQuery request, CancellationToken cancellationToken)
     {
         var userFirstName = await service.Get(client => client.ProductName == request.ProductName,
-                                                new QueryOptions(QueryTrackingMode.AsNoTracking))
-                                         .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+                new QueryOptions(QueryTrackingMode.AsNoTracking))
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         return userFirstName!.Price.ToString(CultureInfo.InvariantCulture);
     }

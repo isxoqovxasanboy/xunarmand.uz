@@ -2,7 +2,7 @@
 
 namespace Xunarmand.Application.Products.Models;
 
-public class ProductFilter:FilterPagination
+public class ProductFilter : FilterPagination
 {
     /// <summary>
     /// Overrides base GetHashCode method
@@ -17,12 +17,13 @@ public class ProductFilter:FilterPagination
 
         return hashCode.ToHashCode();
     }
+
     /// <summary>
     /// Overrides base Equals method
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public override bool Equals(object? obj) => 
-        obj is ProductFilter clientFilter 
+    public override bool Equals(object? obj) =>
+        obj is ProductFilter clientFilter
         && clientFilter.GetHashCode() == GetHashCode();
 }

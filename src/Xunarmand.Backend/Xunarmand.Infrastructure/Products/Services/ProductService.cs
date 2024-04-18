@@ -11,24 +11,24 @@ using Xunarmand.Persistence.Repositories.Interface;
 
 namespace Xunarmand.Infrastructure.Products.Services;
 
-public class ProductService(IProductRepository repository,IValidator<Product> validator):IProductService
+public class ProductService(IProductRepository repository, IValidator<Product> validator) : IProductService
 {
     public IQueryable<Product> Get(Expression<Func<Product, bool>>? predicate = default,
-                                   QueryOptions queryOptions = default)
+        QueryOptions queryOptions = default)
         => repository.Get(predicate, queryOptions);
 
     public IQueryable<Product> Get(ProductFilter clientFilter, QueryOptions queryOptions = default)
         => repository.Get(queryOptions: queryOptions).ApplyPagination(clientFilter);
 
     public ValueTask<Product?> GetByIdAsync(Guid userId, QueryOptions queryOptions = default,
-                                            CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
         return repository.GetByIdAsync(userId, queryOptions, cancellationToken);
     }
-        
+
 
     public ValueTask<Product> CreateAsync(Product product, CommandOptions commandOptions = default,
-                                          CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
         var validationResult = validator
             .Validate(product,
@@ -41,18 +41,17 @@ public class ProductService(IProductRepository repository,IValidator<Product> va
     }
 
     public async ValueTask<Product> UpdateAsync(Product product, CommandOptions commandOptions = default,
-                                          CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
-        
         var validationResult = await validator
             .ValidateAsync(product,
                 options => options.IncludeRuleSets(EntityEvent.OnUpdate.ToString()), cancellationToken);
 
-        
+
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
-        
-        
+
+
         var foundClient = await GetByIdAsync(product.Id, cancellationToken: cancellationToken) ??
                           throw new InvalidOperationException();
 
@@ -66,6 +65,6 @@ public class ProductService(IProductRepository repository,IValidator<Product> va
     }
 
     public ValueTask<Product?> DeleteByIdAsync(Guid productId, CommandOptions commandOptions = default,
-                                               CancellationToken cancellationToken = default)
-     => repository.DeleteByIdAsync(productId, commandOptions, cancellationToken);
+        CancellationToken cancellationToken = default)
+        => repository.DeleteByIdAsync(productId, commandOptions, cancellationToken);
 }

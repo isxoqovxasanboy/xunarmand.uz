@@ -13,8 +13,8 @@ public class ProductGetQueryHandler(IProductService service, IMapper mapper)
     public async Task<ICollection<ProductDto>> Handle(ProductGetQuery request, CancellationToken cancellationToken)
     {
         var matchedUsers = await service
-                                 .Get((ProductFilter)request.Filter, new QueryOptions(QueryTrackingMode.AsNoTracking))
-                                 .ToListAsync(cancellationToken);
+            .Get(request.Filter, new QueryOptions(QueryTrackingMode.AsNoTracking))
+            .ToListAsync(cancellationToken);
 
         return mapper.Map<ICollection<ProductDto>>(matchedUsers);
     }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Xunarmand.Application.Product.Commands;
+using Xunarmand.Application.Products.Commands;
 using Xunarmand.Application.Products.Queries;
 using Xunarmand.Application.Users.Commands;
 

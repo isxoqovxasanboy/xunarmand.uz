@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Xunarmand.Application.Product.Commands;
+using Xunarmand.Application.Products.Commands;
 using Xunarmand.Application.Products.Service;
 using Xunarmand.Domain.Common.Commands;
 
