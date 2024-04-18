@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Xunarmand.Application.Product.Models;
+using Xunarmand.Application.Products.Models;
 using Xunarmand.Domain.Entities;
 
 namespace Xunarmand.Infrastructure.Products.Mappers;

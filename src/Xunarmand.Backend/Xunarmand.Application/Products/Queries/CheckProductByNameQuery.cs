@@ -2,7 +2,7 @@
 
 namespace Xunarmand.Application.Products.Queries;
 
-public class CheckProductByNameQuery: IQuery<string>
+public class CheckProductByNameQuery : IQuery<string>
 {
     public string ProductName { get; set; }
 }

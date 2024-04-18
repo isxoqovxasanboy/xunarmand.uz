@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using FluentValidation;
-using Xunarmand.Application.Product.Models;
+using Xunarmand.Application.Products.Models;
+using Xunarmand.Application.Products.Service;
 using Xunarmand.Domain.Common.Commands;
 using Xunarmand.Domain.Common.Queries;
 using Xunarmand.Domain.Entities;

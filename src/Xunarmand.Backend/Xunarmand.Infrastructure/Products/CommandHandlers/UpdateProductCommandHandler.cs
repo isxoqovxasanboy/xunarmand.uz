@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Xunarmand.Application.Product.Commands;
-using Xunarmand.Application.Product.Models;
+using Xunarmand.Application.Products.Models;
+using Xunarmand.Application.Products.Service;
 using Xunarmand.Domain.Common.Commands;
 using Xunarmand.Domain.Entities;
 

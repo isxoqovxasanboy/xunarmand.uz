@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Xunarmand.Api.Data;
 using Xunarmand.Application.Common.Settings;
+using Xunarmand.Application.Products.Service;
 using Xunarmand.Application.Users.Services;
 using Xunarmand.Infrastructure.Products.Services;
 using Xunarmand.Infrastructure.Users.Services;

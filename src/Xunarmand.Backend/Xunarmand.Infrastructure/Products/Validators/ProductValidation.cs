@@ -30,10 +30,10 @@ public class ProductValidation : AbstractValidator<Product>
                     .NotEmpty()
                     .MinimumLength(3)
                     .MaximumLength(64);
-                
+
                 RuleFor(product => product.Price)
-                   .NotEmpty()
-                   .GreaterThan(0);
+                    .NotEmpty()
+                    .GreaterThan(0);
             });
         RuleSet(
             EntityEvent.OnUpdate.ToString(),
@@ -49,7 +49,7 @@ public class ProductValidation : AbstractValidator<Product>
                     .NotEmpty()
                     .MinimumLength(3)
                     .MaximumLength(64);
-                
+
                 RuleFor(product => product.Price)
                     .NotEmpty()
                     .GreaterThan(0);
@@ -58,7 +58,6 @@ public class ProductValidation : AbstractValidator<Product>
                     .NotEmpty()
                     .MinimumLength(3)
                     .MaximumLength(64);
-                
             }
         );
     }
