@@ -12,8 +12,8 @@ using Xunarmand.Persistence.DataContext;
 namespace Xunarmand.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240417085013_Add_Order_And_Product_Relations")]
-    partial class Add_Order_And_Product_Relations
+    [Migration("20240419110902_Add_Order_And_Product_Relation")]
+    partial class Add_Order_And_Product_Relation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,18 +37,16 @@ namespace Xunarmand.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTimeOffset>("OrderDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ProductAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
@@ -56,7 +54,6 @@ namespace Xunarmand.Persistence.Migrations
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedTime")
@@ -133,20 +130,20 @@ namespace Xunarmand.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
+            modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Xunarmand.Domain.Entities.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("Xunarmand.Domain.Entities.Order", "Orders")
+                        .WithMany("Products")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,38 +5,21 @@ using Xunarmand.Domain.Enums;
 
 namespace Xunarmand.Domain.Entities;
 
-/// <summary>
-/// Represents an order for a product.
-/// </summary>
 public class Order : AuditableEntity
 {
-    /// <summary>
-    /// Gets or sets the price of the product in the order.
-    /// </summary>
+    // The total price of the order
     public decimal Price { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the amount of the product in the order.
-    /// </summary>
-    public int ProductAmount { get; set; }
 
-    /// <summary>
-    /// Gets or sets the ID of the product associated with the order.
-    /// </summary>
-    public Guid ProductId { get; set; } = default!;
-   
-    /// <summary>
-    /// Gets or sets the ID of the basket associated with the order.
-    /// </summary>
-    public Guid BasketId { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the product associated with the order.
-    /// </summary>
-    public Product Product { get; set; } 
-    
-    /// <summary>
-    /// Gets or sets the Basket associated with the order.
-    /// </summary>
-    public Basket Basket { get; set; }
+    // The quantity of products in the order
+    public int ProductAmount { get; set; }
+    [NotMapped]
+    // The ID of the user who placed the order
+    public Guid UserId { get; set; }
+    [NotMapped]
+    // Navigation property representing the user who placed the order
+    public User? User { get; set; }
+    public List<Product> Products { get; set; } = new List<Product>();
+
+    // The date and time when the order was placed
+    public DateTimeOffset OrderDate { get; set; }
 }

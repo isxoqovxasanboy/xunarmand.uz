@@ -6,28 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Xunarmand.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Order_And_Product_Relations : Migration
+    public partial class Add_Order_And_User_Relation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<Guid>(
-                name: "ProductId",
+                name: "UserId",
                 table: "Orders",
                 type: "uuid",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ProductId",
+                name: "IX_Orders_UserId",
                 table: "Orders",
-                column: "ProductId");
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Products_ProductId",
+                name: "FK_Orders_Users_UserId",
                 table: "Orders",
-                column: "ProductId",
-                principalTable: "Products",
+                column: "UserId",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -36,15 +36,15 @@ namespace Xunarmand.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Products_ProductId",
+                name: "FK_Orders_Users_UserId",
                 table: "Orders");
 
             migrationBuilder.DropIndex(
-                name: "IX_Orders_ProductId",
+                name: "IX_Orders_UserId",
                 table: "Orders");
 
             migrationBuilder.DropColumn(
-                name: "ProductId",
+                name: "UserId",
                 table: "Orders");
         }
     }

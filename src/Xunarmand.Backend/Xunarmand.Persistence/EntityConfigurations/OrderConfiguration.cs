@@ -8,17 +8,18 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
+        builder.HasKey(o => o.Id);
         builder.Property(order => order.Price).HasColumnType("decimal(18,2)").IsRequired();
         builder.Property(order => order.ProductAmount).HasColumnType("decimal(18,2)").IsRequired();
 
-        builder
-            .HasOne(order => order.Product)
-            .WithMany(product => product.Orders)
-            .HasForeignKey(order => order.ProductId);
+        builder.HasOne(o => o.User)
+               .WithMany(u => u.Orders)
+               .HasForeignKey(o => o.UserId)
+               .IsRequired();
         
-        builder
-            .HasOne(order => order.Basket)
-            .WithMany(product => product.Orders)
-            .HasForeignKey(order => order.BasketId);
+        builder.HasMany(o => o.Products)
+               .WithOne(p => p.Orders)
+               .HasForeignKey(p => p.Id)
+               .IsRequired();
     }
 }

@@ -22,47 +22,19 @@ namespace Xunarmand.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset?>("ModifiedTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("OperationTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Baskets");
-                });
-
             modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BasketId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTimeOffset?>("ModifiedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<decimal>("Price")
@@ -71,14 +43,12 @@ namespace Xunarmand.Persistence.Migrations
                     b.Property<decimal>("ProductAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BasketId");
-
-                    b.HasIndex("ProductId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -86,7 +56,6 @@ namespace Xunarmand.Persistence.Migrations
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedTime")
@@ -163,47 +132,36 @@ namespace Xunarmand.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
+            modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
                 {
                     b.HasOne("Xunarmand.Domain.Entities.User", "User")
-                        .WithMany("Baskets")
-                        .HasForeignKey("UserId");
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
-                {
-                    b.HasOne("Xunarmand.Domain.Entities.Basket", "Basket")
-                        .WithMany("Orders")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Xunarmand.Domain.Entities.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Basket");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Xunarmand.Domain.Entities.Basket", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
+                    b.HasOne("Xunarmand.Domain.Entities.Order", "Orders")
+                        .WithMany("Products")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Baskets");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

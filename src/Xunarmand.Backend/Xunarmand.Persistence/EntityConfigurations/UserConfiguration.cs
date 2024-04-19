@@ -8,6 +8,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
+        builder.HasKey(u => u.Id);
         builder.Property(user => user.FirstName).HasMaxLength(64);
         builder.Property(user => user.LastName).HasMaxLength(64);
         builder.Property(user => user.EmailAddress).HasMaxLength(128).IsRequired();
