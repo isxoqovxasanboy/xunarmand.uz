@@ -37,8 +37,9 @@ public class User : AuditableEntity
     /// Gets or sets the birthday of the user.
     /// </summary>
     public DateOnly Birthday { get; set; }
-    
-    // A list of products included in the order   
-    [NotMapped]
+
+    /// <summary>
+    /// Collection of orders placed by the user.
+    /// </summary>
     public List<Order> Orders { get; set; } = new List<Order>();
 }

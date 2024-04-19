@@ -1,25 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using Xunarmand.Domain.Common.Entities;
-using Xunarmand.Domain.Enums;
+﻿using Xunarmand.Domain.Common.Entities;
 
-namespace Xunarmand.Domain.Entities;
-
-public class Order : AuditableEntity
+namespace Xunarmand.Domain.Entities
 {
-    // The total price of the order
-    public decimal Price { get; set; }
+    /// <summary>
+    /// Represents an order entity in the system, inheriting auditable properties from the AuditableEntity base class.
+    /// </summary>
+    public class Order : AuditableEntity
+    {
+        /// <summary>
+        /// The total price of the order.
+        /// </summary>
+        public decimal Price { get; set; }
 
-    // The quantity of products in the order
-    public int ProductAmount { get; set; }
-    [NotMapped]
-    // The ID of the user who placed the order
-    public Guid UserId { get; set; }
-    [NotMapped]
-    // Navigation property representing the user who placed the order
-    public User? User { get; set; }
-    public List<Product> Products { get; set; } = new List<Product>();
+        /// <summary>
+        /// The quantity of products in the order.
+        /// </summary>
+        public int ProductAmount { get; set; }
 
-    // The date and time when the order was placed
-    public DateTimeOffset OrderDate { get; set; }
+        /// <summary>
+        /// The ID of the user who placed the order.
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
+        /// Navigation property representing the user who placed the order.
+        /// </summary>
+        public User? User { get; set; }
+
+        /// <summary>
+        /// The date and time when the order was placed.
+        /// </summary>
+        public DateTimeOffset OrderDate { get; set; }
+
+        /// <summary>
+        /// Collection of products associated with the order.
+        /// </summary>
+        public List<Product> Products { get; set; } = new List<Product>();
+    }
 }

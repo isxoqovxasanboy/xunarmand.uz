@@ -56,6 +56,7 @@ namespace Xunarmand.Persistence.Migrations
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedTime")
@@ -72,6 +73,9 @@ namespace Xunarmand.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -86,6 +90,8 @@ namespace Xunarmand.Persistence.Migrations
                         .HasColumnType("character varying(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -145,13 +151,13 @@ namespace Xunarmand.Persistence.Migrations
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Xunarmand.Domain.Entities.Order", "Orders")
+                    b.HasOne("Xunarmand.Domain.Entities.Order", "Order")
                         .WithMany("Products")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Orders");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Xunarmand.Domain.Entities.Order", b =>
