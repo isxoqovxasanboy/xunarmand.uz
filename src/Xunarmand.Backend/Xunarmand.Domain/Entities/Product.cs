@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Xunarmand.Domain.Common.Entities;
 
 namespace Xunarmand.Domain.Entities;
@@ -32,9 +32,6 @@ public class Product : AuditableEntity
     /// Gets or sets the URL of the product image.
     /// </summary>
     public string? ImageUrl { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the collection of orders associated with the product.
-    /// </summary>
-    public ICollection<Order> Orders { get; set; }
+    // A list of products included in the order
+    public Order? Orders { get; set; }
 }

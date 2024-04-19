@@ -1,4 +1,4 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Xunarmand.Domain.Common.Entities;
 
 namespace Xunarmand.Domain.Entities;
@@ -37,9 +37,8 @@ public class User : AuditableEntity
     /// Gets or sets the birthday of the user.
     /// </summary>
     public DateOnly Birthday { get; set; }
-
-    /// <summary>
-    /// Navigation property to access the baskets associated with this basket.
-    /// </summary>
-    public ICollection<Basket> Baskets { get; set; }
+    
+    // A list of products included in the order   
+    [NotMapped]
+    public List<Order> Orders { get; set; } = new List<Order>();
 }
