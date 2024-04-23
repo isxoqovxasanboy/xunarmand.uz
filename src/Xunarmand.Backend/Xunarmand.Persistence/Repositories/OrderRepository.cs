@@ -15,9 +15,9 @@ public class OrderRepository(AppDbContext dbContext)
         => base.Get(predicate, queryOptions);
 
 
-    public new ValueTask<Order?> GetByIdAsync(Guid userId, QueryOptions queryOptions = default,
+    public new ValueTask<Order?> GetByIdAsync(Guid orderId, QueryOptions queryOptions = default,
         CancellationToken cancellationToken = default)
-        => base.GetByIdAsync(userId, queryOptions, cancellationToken);
+        => base.GetByIdAsync(orderId, queryOptions, cancellationToken);
 
 
     public new ValueTask<Order> CreateAsync(Order order, CommandOptions commandOptions = default,
@@ -32,7 +32,7 @@ public class OrderRepository(AppDbContext dbContext)
         return base.UpdateAsync(order, commandOptions, cancellationToken);
     }
 
-    public new ValueTask<Order?> DeleteByIdAsync(Guid userId, CommandOptions commandOptions,
+    public new ValueTask<Order?> DeleteByIdAsync(Guid orderId, CommandOptions commandOptions,
         CancellationToken cancellationToken = default)
-        => base.DeleteByIdAsync(userId, commandOptions, cancellationToken);
+        => base.DeleteByIdAsync(orderId, commandOptions, cancellationToken);
 }

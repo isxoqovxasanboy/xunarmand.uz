@@ -15,9 +15,14 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                .WithMany(user => user.Orders)
                .HasForeignKey(order => order.UserId)
                .IsRequired();
-
-        builder.HasMany(order => order.Products)
-            .WithOne(product => product.Order)
-            .HasForeignKey(product => product.OrderId);
     }
 }
+
+
+
+
+
+
+
+
+

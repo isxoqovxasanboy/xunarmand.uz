@@ -20,7 +20,7 @@ namespace Xunarmand.Domain.Entities
         /// <summary>
         /// The ID of the user who placed the order.
         /// </summary>
-        public Guid UserId { get; set; }
+        public Guid UserId { get;set;}
 
         /// <summary>
         /// Navigation property representing the user who placed the order.
@@ -32,9 +32,7 @@ namespace Xunarmand.Domain.Entities
         /// </summary>
         public DateTimeOffset OrderDate { get; set; }
 
-        /// <summary>
-        /// Collection of products associated with the order.
-        /// </summary>
-        public List<Product> Products { get; set; } = new List<Product>();
+        
+        public ICollection<Product> Products { get; set; }
     }
 }

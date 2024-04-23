@@ -8,8 +8,6 @@ public class OrderDto
 
     public Guid ProductId { get; set; }
 
-    public ProductStatus Status { get; set; }
-
     public decimal Price { get; set; }
 
     public int Amount { get; set; }

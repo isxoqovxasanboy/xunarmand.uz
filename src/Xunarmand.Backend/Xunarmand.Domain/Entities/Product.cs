@@ -32,16 +32,10 @@ namespace Xunarmand.Domain.Entities
         /// Gets or sets the URL of the product image.
         /// </summary>
         public string? ImageUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ID of the order associated with the product.
-        /// </summary>
-        [ForeignKey("Order")]
-        public Guid OrderId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the order associated with the product.
-        /// </summary>
-        public Order Order { get; set; }
+        
+        public Order? Order { get; set; }
+        
+        public Guid? OrderId { get; set; }
+        
     }
 }

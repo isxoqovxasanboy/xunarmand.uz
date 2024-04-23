@@ -28,7 +28,15 @@ public class UserController(IMediator mediator): ControllerBase
 
         return result is not null ? Ok(result) : NotFound();
     }
-    
+
+    [HttpPost]
+    public async ValueTask<IActionResult> Create([FromBody] UserCreateCommand userCreateCommand,
+                                                 CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(userCreateCommand, cancellationToken);
+        return Ok(result);
+        
+    }
     [HttpPut]
     public async ValueTask<IActionResult> Update([FromBody] UserUpdateCommand command, CancellationToken cancellationToken)
     {

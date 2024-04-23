@@ -4,8 +4,10 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Xunarmand.Api.Data;
 using Xunarmand.Application.Common.Settings;
+using Xunarmand.Application.Orders.Service;
 using Xunarmand.Application.Products.Service;
 using Xunarmand.Application.Users.Services;
+using Xunarmand.Infrastructure.Orders.Service;
 using Xunarmand.Infrastructure.Products.Services;
 using Xunarmand.Infrastructure.Users.Services;
 using Xunarmand.Persistence.DataContext;
@@ -14,7 +16,7 @@ using Xunarmand.Persistence.Repositories.Interface;
 
 namespace Xunarmand.Api.Configurations;
 
-public static partial class  HostConfigurations
+public static partial class HostConfigurations
 {
     private static readonly ICollection<Assembly> Assemblies;
 
@@ -23,7 +25,7 @@ public static partial class  HostConfigurations
         Assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load).ToList();
         Assemblies.Add(Assembly.GetExecutingAssembly());
     }
-    
+
     private static WebApplicationBuilder AddMappers(this WebApplicationBuilder builder)
     {
         builder.Services.AddAutoMapper(Assemblies);
@@ -36,6 +38,7 @@ public static partial class  HostConfigurations
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
         return builder;
     }
+
     private static async ValueTask<WebApplication> SeedDataAsync(this WebApplication app)
     {
         var serviceScope = app.Services.CreateScope();
@@ -46,22 +49,26 @@ public static partial class  HostConfigurations
 
     private static WebApplicationBuilder AddIdentityInfrastructure(this WebApplicationBuilder builder)
     {
+        // product
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
         builder.Services.AddScoped<IProductService, ProductService>();
-        
-        
-        
+
+
         // user
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserService, UserService>();
 
-        return builder;
+        // order
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
 
+        return builder;
     }
+
     private static WebApplicationBuilder AddMediator(this WebApplicationBuilder builder)
     {
-        builder.Services.AddMediatR(conf => {conf.RegisterServicesFromAssemblies(Assemblies.ToArray());});
-        
+        builder.Services.AddMediatR(conf => { conf.RegisterServicesFromAssemblies(Assemblies.ToArray()); });
+
         return builder;
     }
 
@@ -69,7 +76,7 @@ public static partial class  HostConfigurations
     {
         builder.Services.AddSwaggerGen();
         builder.Services.AddEndpointsApiExplorer();
-        
+
         return builder;
     }
 
@@ -77,22 +84,23 @@ public static partial class  HostConfigurations
     {
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         builder.Services.AddControllers();
-        
+
         return builder;
     }
-    
+
     private static WebApplication UseDevtools(this WebApplication app)
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-        
+
         return app;
     }
+
     private static WebApplicationBuilder AddValidators(this WebApplicationBuilder builder)
     {
         builder.Services.Configure<ValidationSettings>(builder.Configuration.GetSection(nameof(ValidationSettings)));
 
-        builder.Services.AddValidatorsFromAssemblies(Assemblies).AddFluentValidationAutoValidation();        
+        builder.Services.AddValidatorsFromAssemblies(Assemblies).AddFluentValidationAutoValidation();
         return builder;
     }
 
@@ -102,8 +110,7 @@ public static partial class  HostConfigurations
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        
+
         return app;
     }
 }
-

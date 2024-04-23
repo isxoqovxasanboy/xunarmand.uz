@@ -13,5 +13,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(product => product.Description).HasMaxLength(256);
         builder.Property(product => product.ImageUrl).HasMaxLength(256);
         builder.Property(product => product.Price).HasColumnType("decimal(18,2)").IsRequired();
+        
+        builder.HasOne(order => order.Order)
+               .WithMany(product => product.Products)
+               .HasForeignKey(order => order.OrderId)
+               .IsRequired(false);
     }
 }
