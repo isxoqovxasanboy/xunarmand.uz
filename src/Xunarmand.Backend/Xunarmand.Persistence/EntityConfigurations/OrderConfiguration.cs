@@ -12,9 +12,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(order => order.ProductAmount).HasColumnType("decimal(18,2)").IsRequired();
 
         builder.HasOne(order => order.User)
-               .WithMany(user => user.Orders)
+               .WithMany(user   => user.Orders)
                .HasForeignKey(order => order.UserId)
                .IsRequired();
+
+        builder.HasOne<User>().WithMany().HasForeignKey(user => user.UserId);
     }
 }
 
@@ -22,7 +24,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
 
 
-
+ 
 
 
 
